@@ -13,6 +13,8 @@ namespace Minesweeper
     public partial class SetDifficulty : Form
     {
         public int dificulty = 10;
+        public int width;
+        public int height;
         public SetDifficulty()
         {
             InitializeComponent();
@@ -29,14 +31,27 @@ namespace Minesweeper
             if(easy.Checked)
             {
                 dificulty = 10;
+                width = 10;
+                height = 10;
             }
             if(medium.Checked)
             { 
-                dificulty = 15;
+                dificulty = 40;
+                width = 15;
+                height = 15;
             }
             if(hard.Checked)
             {
-                dificulty = 20;
+                dificulty = 70;
+                width = 19;
+                height = 19;
+            }
+            else if(!easy.Checked && !medium.Checked && !hard.Checked)
+            {
+                dificulty = int.Parse(textBox3.Text);
+                width = int.Parse(textBox1.Text);
+                height = int.Parse(textBox2.Text);
+
             }
             this.Close();
         }

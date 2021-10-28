@@ -16,7 +16,9 @@ namespace Minesweeper
         Random r = new Random();
         public int c = 0;
         public Cell[,] buttons;
-        public int size;
+        public int bombs;
+        public int h;
+        public int w;
         int time = 0;
         int counter = 0;
 
@@ -38,9 +40,11 @@ namespace Minesweeper
             SetDifficulty diff = new SetDifficulty();
             diff.ShowDialog();
             InitializeComponent();
-            buttons = new Cell[diff.dificulty, diff.dificulty];
-            this.Size = new Size((buttons.GetUpperBound(0) * +1) * 47 , (buttons.GetUpperBound(buttons.Rank - 1) + 1) * 49 + 2);
-            size = diff.dificulty;
+            w = diff.width;
+            h = diff.height;
+            buttons = new Cell[h,w];
+            this.Size = new Size(w * 49 + 10  , h * 49 + 10);
+            bombs = diff.dificulty;
             timer1.Start();
         }
 
@@ -69,21 +73,14 @@ namespace Minesweeper
         {
             Cell[] liveCells = new Cell[100];
             int s = 0;
-            int ss=0;
-            if (size == 10)
-                ss = 10;
-            if (size == 15)
-                ss = 30;
-            if (size == 20)
-                ss = 50;
-            while (s < ss)
+            while (s < bombs)
             {
                 for (int i = 0; i < buttons.GetUpperBound(0); i++)
                 {
                     for (int j = 0; j < buttons.GetUpperBound(1); j++)
                     {
                         int rnext = r.Next() % (buttons.GetLength(0) * buttons.GetLength(1));
-                        if (rnext < size && buttons[i, j].getLive()==false && buttons[i,j].getNeighbours()!=9)
+                        if (rnext < bombs && buttons[i, j].getLive()==false && buttons[i,j].getNeighbours()!=9)
                         {
                             buttons[i, j].setLive(true);
                             buttons[i, j].setNeighbours(9);
@@ -91,10 +88,10 @@ namespace Minesweeper
                             c++;
                             s++;
                         }
-                        if (s == ss)
+                        if (s == bombs)
                             break;
                     }
-                    if (s == ss)
+                    if (s == bombs)
                         break;
                 }
             }
@@ -133,7 +130,7 @@ namespace Minesweeper
             }
             private void revealNeighbours(int row, int column)
             {
-                if (row < 0 || row >= size || column < 0 || column >= size)
+                if (row < 0 || row >= h || column < 0 || column >= w)
                 {
                     return;
                 }
@@ -204,7 +201,7 @@ namespace Minesweeper
                             }
                         }
                     }
-                    DialogResult dialog = MessageBox.Show("You lost. Try again later");
+                    DialogResult dialog = MessageBox.Show("You lost:(( Try again later");
                     if (dialog == DialogResult.OK)
                     {
                         timer1.Stop();
@@ -212,7 +209,7 @@ namespace Minesweeper
                     }
                 }
 
-                if (counter + c == size * size)
+                if (counter + c == w * h)
                 {
                     DialogResult dialog = MessageBox.Show("You won!!! Your time was " + time + " seconds.");
                     if (dialog == DialogResult.OK)
@@ -240,8 +237,9 @@ namespace Minesweeper
                         buttons[triggered.getRow(), triggered.getColumn()].Image = blank;
                     }
                 }
-                else
+                else if(buttons[triggered.getRow(), triggered.getColumn()].getFlag() == false)
                 {
+
                     revealNeighbours(triggered.getRow(), triggered.getColumn());
                 }
             }
