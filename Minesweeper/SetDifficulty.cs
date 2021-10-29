@@ -34,17 +34,23 @@ namespace Minesweeper
                 width = 10;
                 height = 10;
             }
-            if(medium.Checked)
+            else if(medium.Checked)
             { 
                 dificulty = 40;
                 width = 15;
                 height = 15;
             }
-            if(hard.Checked)
+            else if(hard.Checked)
             {
                 dificulty = 70;
                 width = 19;
                 height = 19;
+            }
+            else if(!easy.Checked && !medium.Checked && !hard.Checked && (textBox1.Text=="" || textBox2.Text=="" || textBox3.Text==""))
+            {
+                dificulty = 10;
+                width = 10;
+                height = 10;
             }
             else if(!easy.Checked && !medium.Checked && !hard.Checked)
             {

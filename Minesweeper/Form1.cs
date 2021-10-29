@@ -53,6 +53,7 @@ namespace Minesweeper
             createButtons(buttons);
             activeBoard();
             findNeighbours();
+            label2.Text = bombs.ToString();
         }
         public void createButtons(Cell[,] buttons)
         {
@@ -96,39 +97,39 @@ namespace Minesweeper
                 }
             }
         }
-            public void findNeighbours()
+        public void findNeighbours()
+        {
+            int rowLimit = buttons.GetLength(0);
+            int columnLimit = buttons.GetLength(1);
+
+            for (int i = 0; i < buttons.GetLength(0); i++)
             {
-                int rowLimit = buttons.GetLength(0);
-                int columnLimit = buttons.GetLength(1);
-
-                for (int i = 0; i < buttons.GetLength(0); i++)
+                for (int j = 0; j < buttons.GetLength(1); j++)
                 {
-                    for (int j = 0; j < buttons.GetLength(1); j++)
+                    if (buttons[i, j].getNeighbours() < 9)
                     {
-                        if (buttons[i, j].getNeighbours() < 9)
-                        {
-                            int neighbours = 0;
+                        int neighbours = 0;
 
-                            for (int x = Math.Max(0, i - 1); x <= Math.Min(i + 1, rowLimit - 1); x++)
+                        for (int x = Math.Max(0, i - 1); x <= Math.Min(i + 1, rowLimit - 1); x++)
+                        {
+                            for (int y = Math.Max(0, j - 1); y <= Math.Min(j + 1, columnLimit - 1); y++)
                             {
-                                for (int y = Math.Max(0, j - 1); y <= Math.Min(j + 1, columnLimit - 1); y++)
+                                if (x != i || y != j)
                                 {
-                                    if (x != i || y != j)
+                                    bool test = buttons[x, y].getLive();
+                                    if (test == true)
                                     {
-                                        bool test = buttons[x, y].getLive();
-                                        if (test == true)
-                                        {
-                                            neighbours++;
-                                        }
+                                        neighbours++;
                                     }
                                 }
                             }
-                            buttons[i, j].setNeighbours(neighbours);
                         }
+                        buttons[i, j].setNeighbours(neighbours);
                     }
                 }
             }
-            private void revealNeighbours(int row, int column)
+        }
+        private void revealNeighbours(int row, int column)
             {
                 if (row < 0 || row >= h || column < 0 || column >= w)
                 {
@@ -220,34 +221,39 @@ namespace Minesweeper
                 }
 
             }
-
-            private void button_MouseClick(object sender, MouseEventArgs e)
+        
+        private void button_MouseClick(object sender, MouseEventArgs e)
+        {
+            Cell triggered = (Cell)sender;
+            
+            if (e.Button == MouseButtons.Right)
             {
-                Cell triggered = (Cell)sender;
-                if (e.Button == MouseButtons.Right)
+                if (buttons[triggered.getRow(), triggered.getColumn()].getFlag() == false && (buttons[triggered.getRow(), triggered.getColumn()].getVisited() == false))
                 {
-                    if (buttons[triggered.getRow(), triggered.getColumn()].getFlag() == false)
-                    {
-                        buttons[triggered.getRow(), triggered.getColumn()].setFlag(true);
-                        buttons[triggered.getRow(), triggered.getColumn()].Image = flag;
-                    }
-                    else
-                    {
-                        buttons[triggered.getRow(), triggered.getColumn()].setFlag(false);
-                        buttons[triggered.getRow(), triggered.getColumn()].Image = blank;
-                    }
+                    buttons[triggered.getRow(), triggered.getColumn()].setFlag(true);
+                    buttons[triggered.getRow(), triggered.getColumn()].Image = flag;
+                    bombs--;
+                    label2.Text = bombs.ToString();
                 }
-                else if(buttons[triggered.getRow(), triggered.getColumn()].getFlag() == false)
+                else if(buttons[triggered.getRow(), triggered.getColumn()].getVisited() == false && buttons[triggered.getRow(), triggered.getColumn()].getFlag())
                 {
-
-                    revealNeighbours(triggered.getRow(), triggered.getColumn());
+                    buttons[triggered.getRow(), triggered.getColumn()].setFlag(false);
+                    buttons[triggered.getRow(), triggered.getColumn()].Image = blank;
+                    bombs++;
+                    label2.Text = bombs.ToString();
                 }
             }
-
-            private void timer1_Tick(object sender, EventArgs e)
+            else if (buttons[triggered.getRow(), triggered.getColumn()].getFlag() == false)
             {
-                label1.Text = time.ToString();
-                time++;
+
+                revealNeighbours(triggered.getRow(), triggered.getColumn());
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = time.ToString();
+            time++;
+        }
     }
  }
