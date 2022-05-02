@@ -22,18 +22,18 @@ namespace Minesweeper
         int time = 0;
         int counter = 0;
 
-        Bitmap blank = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\blank.png");
-        Bitmap ablank = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\after blank.png");
-        Bitmap flag = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\flag.png");
-        Bitmap p1 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\1.png");
-        Bitmap p2 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\2.png");
-        Bitmap p3 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\3.png");
-        Bitmap p4 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\4.png");
-        Bitmap p5 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\5.png");
-        Bitmap p6 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\6.png");
-        Bitmap p7 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\7.png");
-        Bitmap p8 = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\8.png");
-        Bitmap bomb = new Bitmap(@"D:\proiecte VS\minesweeper\Minesweeper\Resources\bomb after click.png");
+        Bitmap blank = new Bitmap(Properties.Resources.blank);
+        Bitmap ablank = new Bitmap(Properties.Resources.);
+        Bitmap flag = new Bitmap(Properties.Resources.flag);
+        Bitmap p1 = new Bitmap(Properties.Resources._1);
+        Bitmap p2 = new Bitmap(Properties.Resources._2);
+        Bitmap p3 = new Bitmap(Properties.Resources._3);
+        Bitmap p4 = new Bitmap(Properties.Resources._4);
+        Bitmap p5 = new Bitmap(Properties.Resources._5);
+        Bitmap p6 = new Bitmap(Properties.Resources._6);
+        Bitmap p7 = new Bitmap(Properties.Resources._7);
+        Bitmap p8 = new Bitmap(Properties.Resources._8);
+        Bitmap bomb = new Bitmap(Properties.Resources.bomb_after_click);
 
         public Form1()
         {
