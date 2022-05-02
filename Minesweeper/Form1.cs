@@ -254,6 +254,7 @@ namespace Minesweeper
         {
             label1.Text = time.ToString();
             time++;
-        }
+        } 
+
     }
  }
