@@ -48,6 +48,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,7 +98,6 @@
     <EmbeddedResource Include="SetDifficulty.resx">
       <DependentUpon>SetDifficulty.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Minesweeper_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\after blank.png" />
+    <Content Include="Resources\after_blank2.png" />
     <Content Include="Resources\bomb after click.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

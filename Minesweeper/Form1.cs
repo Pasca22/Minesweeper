@@ -23,7 +23,7 @@ namespace Minesweeper
         int counter = 0;
 
         Bitmap blank = new Bitmap(Properties.Resources.blank);
-        Bitmap ablank = new Bitmap(Properties.Resources.);
+        Bitmap ablank = new Bitmap(Properties.Resources.after_blank2);
         Bitmap flag = new Bitmap(Properties.Resources.flag);
         Bitmap p1 = new Bitmap(Properties.Resources._1);
         Bitmap p2 = new Bitmap(Properties.Resources._2);
